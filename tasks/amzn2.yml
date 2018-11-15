@@ -1,6 +1,6 @@
 ---
 - yum:
-    name: httpd
+    name: httpd,mod_ssl
     state: present
 
 - file:
