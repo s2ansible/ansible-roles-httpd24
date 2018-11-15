@@ -1,0 +1,31 @@
+---
+- yum:
+    name: httpd
+    state: present
+
+- file:
+    path: /etc/httpd/conf.d/welcome.conf
+    state: absent
+
+- template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart_httpd_systemd
+
+- template:
+    src: 00-mpm.conf.j2
+    dest: /etc/httpd/conf.modules.d/00-mpm.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart_httpd_systemd
+
+- systemd:
+    name: httpd.service
+    state: started
+    enabled: yes

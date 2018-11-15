@@ -1,0 +1,44 @@
+---
+httpd:
+  ServerRoot: /etc/httpd
+  Listen: '0.0.0.0:80'
+  User: apache
+  Group: apache
+  ServerAdmin: root@localhost
+  ServerName: localhost
+  DocumentRoot:
+    Directory: /var/www/html
+    AllowOverride: All
+    Options: 'MultiViews FollowSymLinks IncludesNoExec ExecCGI'
+    Require: 'all granted'
+  DirectoryIndex: index.html
+  Log:
+    combined:
+      Format: '%h %v %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D \"%{X-Forwarded-For}i\"'
+      CustomLog: logs/access_log
+  EnableMMAP: 'off'
+  EnableSendfile: 'on'
+  IncludeOptional: 'conf.d/*.conf'
+  ServerTokens: Prod
+  TraceEnable: 'off'
+  KeepAlive:
+    Status: 'On'
+    MaxRequests: 100
+    Timeout: 2
+  mpm:
+    select: event
+    prefork:
+      StartServers: 4
+      MinSpareServers: 4
+      MaxSpareServers: 32
+      ServerLimit: 64
+      MaxRequestWorkers: 64
+      MaxRequestsPerChild: 500
+    event:
+      StartServers: 2
+      MinSpareThreads: 25
+      MaxSpareThreads: 50
+      ThreadLimit: 150
+      ThreadsPerChild: 100
+      MaxRequestWorkers: 500
+      MaxConnectionsPerChild: 10000

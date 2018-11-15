@@ -1,0 +1,10 @@
+---
+- name: restart_httpd_systemd
+  systemd:
+    name: httpd.service
+    state: restarted
+
+- name: restart_httpd_service
+  service:
+    name: httpd
+    state: restarted
