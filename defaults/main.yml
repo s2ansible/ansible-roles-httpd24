@@ -1,44 +1,36 @@
 ---
-httpd:
-  ServerRoot: /etc/httpd
-  Listen: '0.0.0.0:80'
-  User: apache
-  Group: apache
-  ServerAdmin: root@localhost
-  ServerName: localhost
-  DocumentRoot:
-    Directory: /var/www/html
-    AllowOverride: All
-    Options: 'MultiViews FollowSymLinks IncludesNoExec ExecCGI'
-    Require: 'all granted'
-  DirectoryIndex: index.html
-  Log:
-    combined:
-      Format: '%h %v %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D \"%{X-Forwarded-For}i\"'
-      CustomLog: logs/access_log
-  EnableMMAP: 'off'
-  EnableSendfile: 'on'
-  IncludeOptional: 'conf.d/*.conf'
-  ServerTokens: Prod
-  TraceEnable: 'off'
-  KeepAlive:
-    Status: 'On'
-    MaxRequests: 100
-    Timeout: 2
-  mpm:
-    select: event
-    prefork:
-      StartServers: 4
-      MinSpareServers: 4
-      MaxSpareServers: 32
-      ServerLimit: 64
-      MaxRequestWorkers: 64
-      MaxRequestsPerChild: 500
-    event:
-      StartServers: 2
-      MinSpareThreads: 25
-      MaxSpareThreads: 50
-      ThreadLimit: 150
-      ThreadsPerChild: 100
-      MaxRequestWorkers: 500
-      MaxConnectionsPerChild: 10000
+httpd_ServerRoot: /etc/httpd
+httpd_Listen: '0.0.0.0:80'
+httpd_User: apache
+httpd_Group: apache
+httpd_ServerAdmin: root@localhost
+httpd_ServerName: localhost
+httpd_DocumentRoot_Directory: /var/www/html
+httpd_DocumentRoot_AllowOverride: All
+httpd_DocumentRoot_Options: 'MultiViews FollowSymLinks IncludesNoExec ExecCGI'
+httpd_DocumentRoot_Require: 'all granted'
+httpd_DirectoryIndex: index.html
+httpd_Log_combined_Format: '%h %v %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D \"%{X-Forwarded-For}i\"'
+httpd_Log_combined_CustomLog: logs/access_log
+httpd_EnableMMAP: 'off'
+httpd_EnableSendfile: 'on'
+httpd_IncludeOptional: 'conf.d/*.conf'
+httpd_ServerTokens: Prod
+httpd_TraceEnable: 'off'
+httpd_KeepAlive_Status: 'On'
+httpd_KeepAlive_MaxRequests: 100
+httpd_KeepAlive_Timeout: 2
+httpd_mpm_select: event
+httpd_mpm_prefork_StartServers: 4
+httpd_mpm_prefork_MinSpareServers: 4
+httpd_mpm_prefork_MaxSpareServers: 32
+httpd_mpm_prefork_ServerLimit: 64
+httpd_mpm_prefork_MaxRequestWorkers: 64
+httpd_mpm_prefork_MaxRequestsPerChild: 500
+httpd_mpm_event_StartServers: 2
+httpd_mpm_event_MinSpareThreads: 25
+httpd_mpm_event_MaxSpareThreads: 50
+httpd_mpm_event_ThreadLimit: 150
+httpd_mpm_event_ThreadsPerChild: 100
+httpd_mpm_event_MaxRequestWorkers: 500
+httpd_mpm_event_MaxConnectionsPerChild: 10000

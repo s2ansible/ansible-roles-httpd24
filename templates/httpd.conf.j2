@@ -1,28 +1,28 @@
 #
-ServerRoot {{ httpd.ServerRoot }}
-Listen {{ httpd.Listen }}
+ServerRoot {{ httpd_ServerRoot }}
+Listen {{ httpd_Listen }}
 Include conf.modules.d/*.conf
 
-User {{ httpd.User }}
-Group {{ httpd.Group }}
+User {{ httpd_User }}
+Group {{ httpd_Group }}
 
-ServerAdmin {{ httpd.ServerAdmin }}
-ServerName {{ httpd.ServerName }}
+ServerAdmin {{ httpd_ServerAdmin }}
+ServerName {{ httpd_ServerName }}
 
 <Directory />
     AllowOverride none
     Require all denied
 </Directory>
 
-DocumentRoot "{{ httpd.DocumentRoot.Directory }}"
-<Directory "{{ httpd.DocumentRoot.Directory }}">
-    AllowOverride {{ httpd.DocumentRoot.AllowOverride }}
-    Options {{ httpd.DocumentRoot.Options }}
-    Require {{ httpd.DocumentRoot.Require }}
+DocumentRoot "{{ httpd_DocumentRoot_Directory }}"
+<Directory "{{ httpd_DocumentRoot_Directory }}">
+    AllowOverride {{ httpd_DocumentRoot_AllowOverride }}
+    Options {{ httpd_DocumentRoot_Options }}
+    Require {{ httpd_DocumentRoot_Require }}
 </Directory>
 
 <IfModule dir_module>
-    DirectoryIndex {{ httpd.DirectoryIndex }}
+    DirectoryIndex {{ httpd_DirectoryIndex }}
 </IfModule>
 
 <Files ".ht*">
@@ -32,8 +32,8 @@ DocumentRoot "{{ httpd.DocumentRoot.Directory }}"
 ErrorLog "logs/error_log"
 LogLevel warn
 <IfModule log_config_module>
-    LogFormat "{{ httpd.Log.combined.Format }}" combined
-    CustomLog "{{ httpd.Log.combined.CustomLog }}" combined
+    LogFormat "{{ httpd_Log_combined_Format }}" combined
+    CustomLog "{{ httpd_Log_combined_CustomLog }}" combined
 </IfModule>
 
 <IfModule alias_module>
@@ -72,34 +72,34 @@ LogLevel warn
 #ErrorDocument 404 "/cgi-bin/missing_handler.pl"
 #ErrorDocument 402 http://www.example.com/subscription_info.html
 
-EnableMMAP {{ httpd.EnableMMAP }}
-EnableSendfile {{ httpd.EnableSendfile }}
-IncludeOptional {{ httpd.IncludeOptional }}
+EnableMMAP {{ httpd_EnableMMAP }}
+EnableSendfile {{ httpd_EnableSendfile }}
+IncludeOptional {{ httpd_IncludeOptional }}
 
-ServerTokens {{ httpd.ServerTokens }}
-TraceEnable {{ httpd.TraceEnable }}
+ServerTokens {{ httpd_ServerTokens }}
+TraceEnable {{ httpd_TraceEnable }}
 RequestHeader unset Proxy
 
-KeepAlive {{ httpd.KeepAlive.Status }}
-MaxKeepAliveRequests {{ httpd.KeepAlive.MaxRequests }}
-KeepAliveTimeout {{ httpd.KeepAlive.Timeout }}
+KeepAlive {{ httpd_KeepAlive_Status }}
+MaxKeepAliveRequests {{ httpd_KeepAlive_MaxRequests }}
+KeepAliveTimeout {{ httpd_KeepAlive_Timeout }}
 
 <IfModule mpm_prefork_module>
-  StartServers {{ httpd.mpm.prefork.StartServers }}
-  MinSpareServers {{ httpd.mpm.prefork.MinSpareServers }}
-  MaxSpareServers {{ httpd.mpm.prefork.MaxSpareServers }}
-  ServerLimit {{ httpd.mpm.prefork.ServerLimit }}
-  MaxRequestWorkers {{ httpd.mpm.prefork.MaxRequestWorkers }}
-  MaxRequestsPerChild {{ httpd.mpm.prefork.MaxRequestsPerChild }}
+  StartServers {{ httpd_mpm_prefork_StartServers }}
+  MinSpareServers {{ httpd_mpm_prefork_MinSpareServers }}
+  MaxSpareServers {{ httpd_mpm_prefork_MaxSpareServers }}
+  ServerLimit {{ httpd_mpm_prefork_ServerLimit }}
+  MaxRequestWorkers {{ httpd_mpm_prefork_MaxRequestWorkers }}
+  MaxRequestsPerChild {{ httpd_mpm_prefork_MaxRequestsPerChild }}
 </IfModule>
 
 <IfModule mpm_event_module>
-  StartServers {{ httpd.mpm.event.StartServers }}
-  MinSpareThreads {{ httpd.mpm.event.MinSpareThreads }}
-  MaxSpareThreads {{ httpd.mpm.event.MaxSpareThreads }}
-  ThreadLimit {{ httpd.mpm.event.ThreadLimit }}
-  ThreadsPerChild {{ httpd.mpm.event.ThreadsPerChild }}
-  MaxRequestWorkers {{ httpd.mpm.event.MaxRequestWorkers }}
-  MaxConnectionsPerChild {{ httpd.mpm.event.MaxConnectionsPerChild }}
+  StartServers {{ httpd_mpm_event_StartServers }}
+  MinSpareThreads {{ httpd_mpm_event_MinSpareThreads }}
+  MaxSpareThreads {{ httpd_mpm_event_MaxSpareThreads }}
+  ThreadLimit {{ httpd_mpm_event_ThreadLimit }}
+  ThreadsPerChild {{ httpd_mpm_event_ThreadsPerChild }}
+  MaxRequestWorkers {{ httpd_mpm_event_MaxRequestWorkers }}
+  MaxConnectionsPerChild {{ httpd_mpm_event_MaxConnectionsPerChild }}
 </IfModule>
 
