@@ -1,13 +1,16 @@
 ---
-- yum:
+- name: Install httpd
+  yum:
     name: httpd
     state: present
 
-- file:
+- name: delete file
+  file:
     path: /etc/httpd/conf.d/welcome.conf
     state: absent
 
-- template:
+- name: Configuration httpd.conf
+  template:
     src: httpd.conf.j2
     dest: /etc/httpd/conf/httpd.conf
     owner: root
@@ -16,7 +19,8 @@
   notify:
     - restart_httpd_systemd
 
-- template:
+- name: Configuration 00-mpm.conf
+  template:
     src: 00-mpm.conf.j2
     dest: /etc/httpd/conf.modules.d/00-mpm.conf
     owner: root
@@ -25,7 +29,8 @@
   notify:
     - restart_httpd_systemd
 
-- systemd:
+- name: Start service
+  systemd:
     name: httpd.service
     state: started
     enabled: yes
